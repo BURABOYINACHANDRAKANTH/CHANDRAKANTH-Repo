@@ -1,0 +1,312 @@
+# git --version --> To see git version
+# git config --global user.name "name" --> To enter user-name globally
+# git config --global user.email "mail-id" --> To enter email globally
+
+(Note: Use global to set the username and e-mail for every repository on your computer.
+If you want to set the username/e-mail for just the current repo, you can remove global)
+
+# mkdir myproject --> To create directory
+# cd myproject --> To change to that directory
+Now that we are in the correct directory. We can start by initializing Git!
+
+(Note: If you already have a folder/directory you would like to use for Git:
+Navigate to it in command line, or open it in your file explorer, right-click and select "Git Bash here)
+
+# git init --> To Initialize Git
+Once you have navigated to the correct folder, you can initialize Git on that folder.
+(Initialized empty Git repository in /Users/user/myproject/.git/)
+
+You just created your first Git Repository!
+
+(Note: Git now knows that it should watch the folder you initiated it on.
+Git creates a hidden folder to keep track of changes.)
+
+You just created your first local Git repo. But it is empty.
+So let's add some files, or create a new file using your favourite text editor. Then save or move it to the folder you just created.
+
+[Example:
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hello World!</title>
+</head>
+<body>
+
+<h1>Hello world!</h1>
+<p>This is the first file in my new Git Repo.</p>
+
+</body>
+</html>]
+
+And save it to our new folder as index.html.
+Let's go back to the terminal and list the files in our current working directory.
+
+ls --> To see list of files and folders
+
+ls will list the files in the directory. We can see that index.html is there.
+Then we check the Git status and see if it is a part of our repo.
+
+[Example:
+git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add ..." to include in what will be committed)
+    index.html
+
+nothing added to commit but untracked files present (use "git add" to track)]
+
+Now Git is aware of the file, but has not added it to our repository!
+Files in your Git repository folder can be in one of 2 states:
+Tracked - files that Git knows about and are added to the repository
+Untracked - files that are in your working directory, but not added to the repository
+When you first add files to an empty repository, they are all untracked. To get Git to track them, you need to stage them, or add them to the staging environment.
+
+Staged files are files that are ready to be committed to the repository you are working on.
+Now we are done working with index.html. So we can add it to the Staging Environment.
+
+# git add index.html --> To add that file into staging area
+The file should be Staged. Let's check the status.
+
+# git status --> To check the status
+
+[Example
+git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached ..." to unstage)
+    new file: index.html]
+
+Now the file has been added to the Staging Environment.
+You can also stage more than one file at a time.
+
+# git add --all --> To add all files in the current directory to the Staging Environment.
+Using --all instead of individual filenames will stage all changes (new, modified, and deleted) files.
+
+Now we added our file to Staging Environment, and we are ready to do our first commit.
+
+(Note: The shorthand command for git add --all is git add -A)
+
+
+Adding commits keep track of our progress and changes as we work. Git considers each commit change point or "save point". It is a point in the project you can go back to if you find a bug, or want to make a change.
+When we commit, we should always include a message.
+By adding clear messages to each commit, it is easy for yourself (and others) to see what has changed and when.
+
+# git commit -m "First release of Hello World!" --> To commit or save the files with message.
+
+[Example
+git commit -m "First release of Hello World!"
+[master (root-commit) 221ec6e] First release of Hello World!
+ 3 files changed, 26 insertions(+)
+ create mode 100644 README.md
+ create mode 100644 bluestyle.css
+ create mode 100644 index.html]
+
+
+The commit command performs a commit, and the -m "message" adds a message.
+
+The Staging Environment has been committed to our repo, with the message:
+"First release of Hello World!"
+
+Git Commit without Stage
+Sometimes, when you make small changes, using the staging environment seems like a waste of time. It is possible to commit changes directly, skipping the staging environment. The -a option will automatically stage every changed, already tracked file.
+
+# git status --short  --> To see the changes in a more compact way.
+
+[Example
+git status --short
+ M index.html]
+
+Note: Short status flags are:
+  ?? - Untracked files
+  A - Files added to stage
+  M - Modified files
+  D - Deleted files
+
+# git commit -a -m "Updated index.html with a new line" --> Direct commit without stagging area.
+
+# git log  --> To view the history of commits for a repository, you can use the log command.
+
+# git command -help -  See all the available options for the specific command
+# git help --all -  See all possible commands
+
+[Example
+$ git help --all
+See 'git help ' to read about a specific subcommand
+
+Main Porcelain Commands
+   add                  Add file contents to the index
+   am                   Apply a series of patches from a mailbox
+   archive              Create an archive of files from a named tree
+   bisect               Use binary search to find the commit that introduced a bug
+   branch               List, create, or delete branches
+   bundle               Move objects and refs by archive
+   checkout             Switch branches or restore working tree files
+   cherry-pick          Apply the changes introduced by some existing commits
+   citool               Graphical alternative to git-commit
+   clean                Remove untracked files from the working tree
+   clone                Clone a repository into a new directory
+   commit               Record changes to the repository
+   describe             Give an object a human readable name based on an available ref
+   diff                 Show changes between commits, commit and working tree, etc
+   fetch                Download objects and refs from another repository
+   format-patch         Prepare patches for e-mail submission
+   gc                   Cleanup unnecessary files and optimize the local repository
+   gitk                 The Git repository browser
+   grep                 Print lines matching a pattern
+   gui                  A portable graphical interface to Git
+   init                 Create an empty Git repository or reinitialize an existing one
+   log                  Show commit logs
+   maintenance          Run tasks to optimize Git repository data
+   merge                Join two or more development histories together
+   mv                   Move or rename a file, a directory, or a symlink
+   notes                Add or inspect object notes
+   pull                 Fetch from and integrate with another repository or a local branch
+   push                 Update remote refs along with associated objects
+   range-diff           Compare two commit ranges (e.g. two versions of a branch)
+   rebase               Reapply commits on top of another base tip
+   reset                Reset current HEAD to the specified state
+   restore              Restore working tree files
+   revert               Revert some existing commits
+   rm                   Remove files from the working tree and from the index
+   shortlog             Summarize 'git log' output
+   show                 Show various types of objects
+   sparse-checkout      Initialize and modify the sparse-checkout
+   stash                Stash the changes in a dirty working directory away
+   status               Show the working tree status
+   submodule            Initialize, update or inspect submodules
+   switch               Switch branches
+   tag                  Create, list, delete or verify a tag object signed with GPG
+   worktree             Manage multiple working trees
+
+Ancillary Commands / Manipulators
+   config               Get and set repository or global options
+   fast-export          Git data exporter
+   fast-import          Backend for fast Git data importers
+   filter-branch        Rewrite branches
+   mergetool            Run merge conflict resolution tools to resolve merge conflicts
+   pack-refs            Pack heads and tags for efficient repository access
+   prune                Prune all unreachable objects from the object database
+   reflog               Manage reflog information
+   remote               Manage set of tracked repositories
+   repack               Pack unpacked objects in a repository
+   replace              Create, list, delete refs to replace objects
+
+Ancillary Commands / Interrogators
+   annotate             Annotate file lines with commit information
+   blame                Show what revision and author last modified each line of a file
+   bugreport            Collect information for user to file a bug report
+   count-objects        Count unpacked number of objects and their disk consumption
+   difftool             Show changes using common diff tools
+   fsck                 Verifies the connectivity and validity of the objects in the database
+   gitweb               Git web interface (web frontend to Git repositories)
+   help                 Display help information about Git
+   instaweb             Instantly browse your working repository in gitweb
+   merge-tree           Show three-way merge without touching index
+   rerere               Reuse recorded resolution of conflicted merges
+   show-branch          Show branches and their commits
+   verify-commit        Check the GPG signature of commits
+   verify-tag           Check the GPG signature of tags
+   whatchanged          Show logs with difference each commit introduces
+
+Interacting with Others
+   archimport           Import a GNU Arch repository into Git
+   cvsexportcommit      Export a single commit to a CVS checkout
+   cvsimport            Salvage your data out of another SCM people love to hate
+   cvsserver            A CVS server emulator for Git
+   imap-send            Send a collection of patches from stdin to an IMAP folder
+   p4                   Import from and submit to Perforce repositories
+   quiltimport          Applies a quilt patchset onto the current branch
+   request-pull         Generates a summary of pending changes
+   send-email           Send a collection of patches as emails
+   svn                  Bidirectional operation between a Subversion repository and Git
+
+Low-level Commands / Manipulators
+   apply                Apply a patch to files and/or to the index
+   checkout-index       Copy files from the index to the working tree
+   commit-graph         Write and verify Git commit-graph files
+   commit-tree          Create a new commit object
+   hash-object          Compute object ID and optionally creates a blob from a file
+   index-pack           Build pack index file for an existing packed archive
+   merge-file           Run a three-way file merge
+   merge-index          Run a merge for files needing merging
+   mktag                Creates a tag object
+   mktree               Build a tree-object from ls-tree formatted text
+   multi-pack-index     Write and verify multi-pack-indexes
+   pack-objects         Create a packed archive of objects
+   prune-packed         Remove extra objects that are already in pack files
+   read-tree            Reads tree information into the index
+   symbolic-ref         Read, modify and delete symbolic refs
+   unpack-objects       Unpack objects from a packed archive
+   update-index         Register file contents in the working tree to the index
+   update-ref           Update the object name stored in a ref safely
+   write-tree           Create a tree object from the current index
+
+Low-level Commands / Interrogators
+   cat-file             Provide content or type and size information for repository objects
+   cherry               Find commits yet to be applied to upstream
+   diff-files           Compares files in the working tree and the index
+   diff-index           Compare a tree to the working tree or index
+   diff-tree            Compares the content and mode of blobs found via two tree objects
+   for-each-ref         Output information on each ref
+   for-each-repo        Run a Git command on a list of repositories
+   get-tar-commit-id    Extract commit ID from an archive created using git-archive
+   ls-files             Show information about files in the index and the working tree
+   ls-remote            List references in a remote repository
+   ls-tree              List the contents of a tree object
+   merge-base           Find as good common ancestors as possible for a merge
+   name-rev             Find symbolic names for given revs
+   pack-redundant       Find redundant pack files
+   rev-list             Lists commit objects in reverse chronological order
+   rev-parse            Pick out and massage parameters
+   show-index           Show packed archive index
+   show-ref             List references in a local repository
+   unpack-file          Creates a temporary file with a blob's contents
+   var                  Show a Git logical variable
+   verify-pack          Validate packed Git archive files
+
+Low-level Commands / Syncing Repositories
+   daemon               A really simple server for Git repositories
+   fetch-pack           Receive missing objects from another repository
+   http-backend         Server side implementation of Git over HTTP
+   send-pack            Push objects over Git protocol to another repository
+   update-server-info   Update auxiliary info file to help dumb servers
+
+Low-level Commands / Internal Helpers
+   check-attr           Display gitattributes information
+   check-ignore         Debug gitignore / exclude files
+   check-mailmap        Show canonical names and email addresses of contacts
+   check-ref-format     Ensures that a reference name is well formed
+   column               Display data in columns
+   credential           Retrieve and store user credentials
+   credential-cache     Helper to temporarily store passwords in memory
+   credential-store     Helper to store credentials on disk
+   fmt-merge-msg        Produce a merge commit message
+   interpret-trailers   Add or parse structured information in commit messages
+   mailinfo             Extracts patch and authorship from a single e-mail message
+   mailsplit            Simple UNIX mbox splitter program
+   merge-one-file       The standard helper program to use with git-merge-index
+   patch-id             Compute unique ID for a patch
+   sh-i18n              Git's i18n setup code for shell scripts
+   sh-setup             Common Git shell script setup code
+   stripspace           Remove unnecessary whitespace
+
+External commands
+   askyesno
+   credential-helper-selector
+   flow
+   lfs]
+
+
+
+
+
+
+
+
+
